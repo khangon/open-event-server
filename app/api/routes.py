@@ -294,6 +294,12 @@ from app.api.video_stream_moderators import (
     VideoStreamModeratorList,
     VideoStreamModeratorRelationship,
 )
+from app.api.custom_form_ticket import (
+    CustomFormTicketListPost,
+    CustomFormTicketDetail,
+    CustomFormTicketRelationshipRequire,
+    CustomFormTicketList
+)
 
 # users
 api.route(UserList, 'user_list', '/users', '/events/<int:event_id>/organizers')
@@ -689,6 +695,7 @@ api.route(
     'ticket_detail',
     '/tickets/<int:id>',
     '/attendees/<int:attendee_id>/ticket',
+    '/custom-form-ticket/<int:custom_form_ticket_id>/ticket'
 )
 api.route(
     TicketRelationshipRequired, 'ticket_event', '/tickets/<int:id>/relationships/event'
@@ -797,6 +804,7 @@ api.route(
     '/users-events-roles/<int:users_events_roles_id>/event',
     '/exhibitors/<int:exhibitor_id>/event',
     '/speaker-invites/<int:speaker_invite_id>/event',
+    '/custom-form-ticket/<int:custom_form_ticket_id>/event',
 )
 api.route(
     EventRelationship,
@@ -1657,6 +1665,8 @@ api.route(
     'custom_form_list',
     '/events/<int:event_id>/custom-forms',
     '/events/<event_identifier>/custom-forms',
+    '/events/<int:event_id>/custom-forms/<string:form_id>',
+    '/events/<event_identifier>/custom-forms/<string:form_id>',
 )
 api.route(
     CustomFormDetail,
@@ -1959,4 +1969,34 @@ api.route(
     VideoStreamModeratorRelationship,
     'video_stream_moderator_stream',
     '/video-stream-moderators/<int:id>/relationships/video-stream',
+)
+api.route(
+    CustomFormTicketListPost,
+    'custom_form_ticket_list_post',
+    '/custom-form-tickets'
+)
+api.route(
+    CustomFormTicketDetail, 'custom_form_ticket_detail', '/custom-form-tickets/<int:id>'
+)
+api.route(
+    CustomFormTicketRelationshipRequire,
+    'custom_form_ticket_ticket',
+    '/custom-form-tickets/<int:id>/relationships/ticket',
+)
+api.route(
+    CustomFormTicketRelationshipRequire,
+    'custom_form_ticket_event',
+    '/custom-form-tickets/<int:id>/relationships/event',
+)
+api.route(
+    CustomFormTicketList,
+    'custom_form_ticket_list',
+    '/events/<int:event_id>/custom-form-ticket',
+    '/events/<int:event_id>/custom-form-ticket/<string:form_id>',
+)
+api.route(
+    EventRelationship,
+    'event_custom_form_tickets',
+    '/events/<int:id>/relationships/custom-form-tickets',
+    '/events/<identifier>/relationships/custom-form-tickets',
 )

@@ -40,6 +40,9 @@ class CustomFormSchema(Schema):
                 "email",
                 "number",
                 "paragraph",
+                "richtextlink",
+                "boolean",
+                "year"
             ]
         ),
     )
@@ -59,3 +62,4 @@ class CustomFormSchema(Schema):
         schema='EventSchemaPublic',
         type_='event',
     )
+    form_id = fields.Str(allow_none=True)
