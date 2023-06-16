@@ -63,3 +63,5 @@ class CustomFormSchema(Schema):
         type_='event',
     )
     form_id = fields.Str(allow_none=True)
+    min = fields.Integer(allow_none=True, default=0)
+    max = fields.Integer(allow_none=True, default=10)
