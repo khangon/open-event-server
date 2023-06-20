@@ -32,11 +32,12 @@ class CustomFormListPost(ResourceList):
                 {'parameter': 'event_id'}, "Event: {} not found".format(data['event_id'])
             )
 
-        # Assign is_complex to True if not found in identifier map of form type
-        data['is_complex'] = (
-            CUSTOM_FORM_IDENTIFIER_NAME_MAP[data['form']].get(data['field_identifier'])
-            is None
-        )
+        if data['form'] != 'attendee':
+            # Assign is_complex to True if not found in identifier map of form type
+            data['is_complex'] = (
+                CUSTOM_FORM_IDENTIFIER_NAME_MAP[data['form']].get(data['field_identifier'])
+                is None
+            )
 
     schema = CustomFormSchema
     methods = [
@@ -57,7 +58,12 @@ class CustomFormList(ResourceList):
         :return:
         """
         query_ = self.session.query(CustomForms)
-        query_ = event_query(query_, view_kwargs)
+        if view_kwargs.get('form_id'):
+            events = safe_query_kwargs(Event, view_kwargs, 'event_id')
+            query_ = self.session.query(CustomForms).filter_by(event_id=events.id)
+            query_ = query_.filter_by(form_id=view_kwargs.get('form_id'))
+        else:
+            query_ = event_query(query_, view_kwargs)
         return query_
 
     view_kwargs = True

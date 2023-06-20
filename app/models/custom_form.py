@@ -178,6 +178,9 @@ class CustomForms(db.Model):
     is_complex = db.Column(db.Boolean, nullable=False, default=False)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id', ondelete='CASCADE'))
     custom_form_options = db.relationship('CustomFormOptions', backref="custom_form")
+    form_id = db.Column(db.String)
+    min = db.Column(db.Integer, default=0, nullable=True)
+    max = db.Column(db.Integer, default=10, nullable=True)
 
     @property
     def identifier(self):
