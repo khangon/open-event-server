@@ -62,6 +62,8 @@ ATTENDEE_FORM = {
     "gender": {"include": 0, "require": 0},
     "age_group": {"include": 0, "require": 0},
     "accept_video_recording": {"include": 0, "require": 0},
+    "language_form_1": {"include": 0, "require": 0},
+    "language_form_2": {"include": 0, "require": 0},
 }
 
 session_form_str = json.dumps(SESSION_FORM, separators=(',', ':'))
@@ -146,6 +148,8 @@ CUSTOM_FORM_IDENTIFIER_NAME_MAP = {
         "acceptVideoRecording": "Photo & video & text consent",
         "acceptShareDetails": "Partner contact consent",
         "acceptReceiveEmails": "Email consent",
+        "language_form_1": "What is your native language, or what language are you most fluent in?",
+        "language_form_2": "Are you fluent in any other of the following languages?"
     },
 }
 
